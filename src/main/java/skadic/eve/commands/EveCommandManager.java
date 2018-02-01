@@ -2,29 +2,16 @@ package skadic.eve.commands;
 
 import skadic.commands.CommandHelp;
 import skadic.commands.CommandRegistry;
-import skadic.commands.Permission;
 import skadic.commands.ServerCommandManager;
 import skadic.eve.Eve;
 import skadic.eve.commands.impl.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static skadic.commands.Permission.*;
-
 public class EveCommandManager extends ServerCommandManager{
 
-    private static final Map<Permission, String> defaultPrefixes = new HashMap<>();
-
-    static {
-        defaultPrefixes.put(ADMIN, "e!!!!");
-        defaultPrefixes.put(HIGH, "e!!!");
-        defaultPrefixes.put(MEDIUM, "e!!");
-        defaultPrefixes.put(LOW, "e!");
-    }
+    private static final String prefix = "'";
 
     public EveCommandManager() {
-        super(Eve.getClient(), defaultPrefixes);
+        super(Eve.getClient(), prefix);
     }
 
     @Override

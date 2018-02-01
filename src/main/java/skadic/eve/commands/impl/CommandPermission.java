@@ -49,7 +49,7 @@ public class CommandPermission extends Command {
     private class CommandSetPermission extends SubCommand{
 
         public CommandSetPermission(CommandRegistry registry, Command parentCommand) {
-            super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN, registry));
+            super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN));
         }
 
         @Override

@@ -11,7 +11,6 @@ import skadic.commands.CommandContext;
 import skadic.commands.CommandRegistry;
 import skadic.commands.Help;
 import skadic.commands.util.Utils;
-import skadic.eve.main.EveLog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -41,7 +40,6 @@ public class CommandAsk extends Command {
         String parsedArgs = parse(args);
         String query = ADV_URL + parsedArgs + "&format=plaintext&output=json";
         String result = executePost(query);
-        EveLog.info("Queried: " + parsedArgs + "| Received: " + result);
         //includepodid=Definition:WordData&includepodid=Result
         try {
             if(result != null) {

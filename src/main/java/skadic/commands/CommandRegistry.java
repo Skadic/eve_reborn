@@ -3,12 +3,8 @@ package skadic.commands;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
 import skadic.commands.limiters.ILimiter;
-import skadic.commands.limiters.PermissionLimiter;
-import skadic.commands.util.Utils;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +15,6 @@ import static skadic.commands.util.Utils.sendMessage;
 
 public class CommandRegistry{
 
-    static {
-        createDirs();
-    }
-
     /**
      * Command name to Command
      */
@@ -32,14 +24,12 @@ public class CommandRegistry{
      */
     private final Map<String, String> aliasToName;
     private final Map<String, String[]> nameToAliases;
-    /**
-     * Permission to Prefix
-     */
-    private final Map<Permission, String> permissionToPrefix;
 
-    public CommandRegistry(Map<Permission, String> prefixes) {
+    private final String prefix;
+
+    public CommandRegistry(String prefix) {
         commands = HashBiMap.create();
-        permissionToPrefix = new HashMap<>(prefixes);
+        this.prefix = prefix;
         aliasToName = new HashMap<>();
         nameToAliases = new HashMap<>();
     }
@@ -56,8 +46,6 @@ public class CommandRegistry{
             call(command.getSubCommand(subCommand).get(), ctx);
             return;
         }
-
-        if(ctx.getPrefixUsed().equals(getPrefixForPermission(command.getLimiter(PermissionLimiter.class).get().getPermission()))) {
             for (ILimiter limiter : command.getLimiters()) {
                 if (!limiter.check(ctx)) {
                     sendMessage(ctx.getChannel(), "Unable to execute command. Limiter denying access: " + limiter.getClass().getSimpleName().replace("Limiter", ""));
@@ -65,7 +53,6 @@ public class CommandRegistry{
                 }
             }
             command.execute(ctx);
-        }
     }
 
     public void register(Command command, String name, String... aliases) throws IllegalArgumentException{
@@ -92,9 +79,10 @@ public class CommandRegistry{
             return Optional.empty();
     }
 
-    public Map<Permission, String> getPrefixMap() {
-        return ImmutableMap.copyOf(permissionToPrefix);
+    public String getPrefix() {
+        return prefix;
     }
+
 
     public BiMap<String, Command> getFilteredCommands() {
         return ImmutableBiMap.copyOf(commands.entrySet().stream()
@@ -104,11 +92,6 @@ public class CommandRegistry{
 
     public BiMap<String, Command> getCommands() {
         return ImmutableBiMap.copyOf(commands);
-    }
-
-
-    public String getPrefixForPermission(Permission permission){
-        return permissionToPrefix.get(permission);
     }
 
     public Optional<String[]> getAliases(String name) {
@@ -130,12 +113,5 @@ public class CommandRegistry{
             return Optional.of(name);
         else
             return Optional.ofNullable(aliasToName.get(name));
-    }
-
-    private static void createDirs(){
-        File maps = Utils.getFileInWorkingDir("data/maps");
-        if(!maps.exists()){
-            maps.mkdirs();
-        }
     }
 }

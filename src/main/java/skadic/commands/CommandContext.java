@@ -14,7 +14,6 @@ import java.util.List;
 public class CommandContext {
 
     private final String content;
-    private final String prefixUsed;
     private final IUser author;
     private final IDiscordClient client;
     private final IChannel channel;
@@ -23,7 +22,7 @@ public class CommandContext {
     private final String name;
     List<String> args;
 
-    public CommandContext(MessageReceivedEvent e, String name, String args, String prefixUsed) {
+    public CommandContext(MessageReceivedEvent e, String name, String args) {
         content = e.getMessage().getContent();
         author = e.getAuthor();
         client = e.getClient();
@@ -32,15 +31,10 @@ public class CommandContext {
         message = e.getMessage();
         this.name = name;
         this.args = args.equals("") ? new ArrayList<>() : new ArrayList<>(Arrays.asList(args.split("\\s+")));
-        this.prefixUsed = prefixUsed;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getPrefixUsed() {
-        return prefixUsed;
     }
 
     public List<String> getArgs() {

@@ -11,7 +11,7 @@ public class CommandDisconnect extends Command {
 
 
     public CommandDisconnect(CommandRegistry registry) {
-        super(registry, new PermissionLimiter(Permission.ADMIN, registry));
+        super(registry, new PermissionLimiter(Permission.ADMIN));
     }
 
     @Override
