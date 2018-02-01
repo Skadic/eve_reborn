@@ -2,7 +2,6 @@ package skadic.eve.commands.impl;
 
 import skadic.commands.*;
 import skadic.commands.limiters.PermissionLimiter;
-import skadic.commands.SubCommand;
 import skadic.commands.util.Utils;
 
 @Help(description = "Makes me say what you want", syntax = "<text>")

@@ -4,16 +4,12 @@ package skadic.commands;
 import skadic.commands.limiters.ILimiter;
 import skadic.commands.limiters.PermissionLimiter;
 import skadic.commands.util.Utils;
-import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.util.EmbedBuilder;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static skadic.commands.util.Utils.sendMessage;
 
 
 /**

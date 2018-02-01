@@ -1,12 +1,11 @@
 package skadic.eve.commands;
 
+import skadic.commands.CommandHelp;
 import skadic.commands.CommandRegistry;
 import skadic.commands.Permission;
 import skadic.commands.ServerCommandManager;
-import skadic.commands.CommandHelp;
-import skadic.eve.commands.impl.CommandPermission;
-import skadic.eve.commands.impl.*;
 import skadic.eve.Eve;
+import skadic.eve.commands.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,5 @@
 package skadic.commands;
 
-import skadic.commands.*;
 import skadic.commands.limiters.PermissionLimiter;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.EmbedBuilder;

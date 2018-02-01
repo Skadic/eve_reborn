@@ -2,14 +2,12 @@ package skadic.eve.commands.impl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import skadic.commands.*;
-import skadic.commands.limiters.ILimiter;
 import skadic.commands.limiters.PermissionLimiter;
 import skadic.commands.util.Utils;
 import skadic.eve.Eve;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IUser;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Help(syntax = "<mention>", description = "Shows your, or someone else's, balance")

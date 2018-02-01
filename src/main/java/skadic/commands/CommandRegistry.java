@@ -1,6 +1,9 @@
 package skadic.commands;
 
-import com.google.common.collect.*;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableMap;
 import skadic.commands.limiters.ILimiter;
 import skadic.commands.limiters.PermissionLimiter;
 import skadic.commands.util.Utils;

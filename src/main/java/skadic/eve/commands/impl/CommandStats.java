@@ -1,7 +1,6 @@
 package skadic.eve.commands.impl;
 
 import skadic.commands.*;
-import skadic.commands.limiters.ILimiter;
 import skadic.commands.util.Utils;
 import skadic.eve.Eve;
 import skadic.eve.listeners.MessageCounter;
@@ -11,7 +10,6 @@ import sx.blah.discord.handle.obj.IUser;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Help(syntax = "<mention>", description = "Shows a user's points (achieved through writing messages) or their level")
