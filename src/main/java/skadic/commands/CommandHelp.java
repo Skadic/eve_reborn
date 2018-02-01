@@ -12,7 +12,7 @@ import static skadic.commands.util.Utils.sendMessage;
 @Help(description = "Lets me help you as far as my ability goes", syntax = "<command>")
 public class CommandHelp extends Command {
     public CommandHelp(CommandRegistry registry) {
-        super(registry, new PermissionLimiter(Permission.LOW, registry));
+        super(registry);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CommandHelp extends Command {
                     StringBuilder sb = new StringBuilder();
                     list.forEach(s -> sb.append(s).append("\n"));
 
-                    eb.appendField(permission.toString() + ": " + registry.getPrefixForPermission(permission), sb.toString(), false);
+                    eb.appendField(permission.toString(), sb.toString(), false);
                 }
             }
 
@@ -76,7 +76,7 @@ public class CommandHelp extends Command {
             Help help = command.getClass().getAnnotation(Help.class);
 
             Permission permission = command.getLimiter(PermissionLimiter.class).get().getPermission();
-            String prefix = registry.getPrefixForPermission(permission);
+            String prefix = registry.getPrefix();
 
             builder.withAuthorName(mainName);
 

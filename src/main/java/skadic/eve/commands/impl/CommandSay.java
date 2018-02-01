@@ -1,14 +1,16 @@
 package skadic.eve.commands.impl;
 
-import skadic.commands.*;
-import skadic.commands.limiters.PermissionLimiter;
+import skadic.commands.Command;
+import skadic.commands.CommandContext;
+import skadic.commands.CommandRegistry;
+import skadic.commands.Help;
 import skadic.commands.util.Utils;
 
 @Help(description = "Makes me say what you want", syntax = "<text>")
 public class CommandSay extends Command {
 
     public CommandSay(CommandRegistry registry) {
-        super(registry, new PermissionLimiter(Permission.LOW, registry));
+        super(registry);
     }
 
     @Override

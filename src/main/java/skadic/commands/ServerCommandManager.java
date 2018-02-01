@@ -11,10 +11,10 @@ import java.util.Set;
 
 public abstract class ServerCommandManager{
     protected final Map<Long, CommandRegistry> serverMap;
-    private final Map<Permission, String> defaultPrefixes;
+    private final String prefix;
 
-    public ServerCommandManager(IDiscordClient client, Map<Permission, String> defaultPrefixes) {
-        this.defaultPrefixes = defaultPrefixes;
+    public ServerCommandManager(IDiscordClient client, String prefix) {
+        this.prefix = prefix;
         serverMap = new HashMap<>();
         client.getDispatcher().registerListener(new ServerRegisterListener(this));
         client.getDispatcher().registerListener(new CommandListener(this));
@@ -29,7 +29,7 @@ public abstract class ServerCommandManager{
     public final void registerServer(long serverID){
         if(serverMap.containsKey(serverID)) throw new IllegalArgumentException("Server with ID " + serverID + " cannot be registered twice!");
 
-        serverMap.put(serverID, new CommandRegistry(defaultPrefixes));
+        serverMap.put(serverID, new CommandRegistry(prefix));
         registerCommands(serverMap.get(serverID));
     }
 

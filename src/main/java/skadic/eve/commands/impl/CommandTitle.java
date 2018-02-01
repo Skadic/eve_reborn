@@ -1,8 +1,10 @@
 package skadic.eve.commands.impl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import skadic.commands.*;
-import skadic.commands.limiters.PermissionLimiter;
+import skadic.commands.Command;
+import skadic.commands.CommandContext;
+import skadic.commands.CommandRegistry;
+import skadic.commands.Help;
 import skadic.commands.util.Utils;
 import skadic.eve.Eve;
 import sx.blah.discord.handle.obj.IChannel;
@@ -19,7 +21,7 @@ public class CommandTitle extends Command {
     private static JdbcTemplate template = Eve.getTemplate();
 
     public CommandTitle(CommandRegistry registry) {
-        super(registry, new PermissionLimiter(Permission.LOW, registry));
+        super(registry);
     }
 
     @Override

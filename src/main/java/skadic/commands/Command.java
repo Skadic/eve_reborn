@@ -28,7 +28,7 @@ public abstract class Command{
         this.registry = registry;
         subCommands = new HashSet<>();
         if(!getLimiter(PermissionLimiter.class).isPresent())
-            limiters.add(new PermissionLimiter(Permission.LOW, registry));
+            limiters.add(new PermissionLimiter(Permission.LOW));
     }
 
     public Command(CommandRegistry registry, ILimiter... limiters) {

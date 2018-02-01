@@ -95,7 +95,7 @@ public class CommandZircons extends Command {
     private class CommandGrant extends SubCommand {
 
         public CommandGrant(CommandRegistry registry, Command parentCommand) {
-            super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN, registry));
+            super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN));
         }
 
         @Override
