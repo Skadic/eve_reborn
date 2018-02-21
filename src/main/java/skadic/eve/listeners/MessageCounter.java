@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  */
 public class MessageCounter implements IListener<MessageReceivedEvent> {
 
-
     private static JdbcTemplate template = Eve.getTemplate();
 
     @Override
@@ -40,10 +39,10 @@ public class MessageCounter implements IListener<MessageReceivedEvent> {
     public static Map<Long, Integer> getMessageCountsForServer(long serverID){
         return template.query("SELECT userid, count FROM msg_count WHERE serverid = ?", new Object[] {serverID},
                 (rs, row) -> new Pair<>(rs.getLong("userid"), rs.getInt("count"))).stream()
-                .collect(Collectors.toMap(Pair::getFirstValue, Pair::getSecondValue));
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 
-    public static void incrementMsgCount(long serverID, long userID){
+    private static void incrementMsgCount(long serverID, long userID){
         List<Integer> list = template.query("SELECT * FROM msg_count WHERE serverid = ? AND userid = ?",
                 new Object[] {serverID, userID},
                 (rs, rowNum) -> rs.getInt("count"));
@@ -65,11 +64,11 @@ public class MessageCounter implements IListener<MessageReceivedEvent> {
             this.u = u;
         }
 
-        public T getFirstValue(){
+        public T getFirst(){
             return t;
         }
 
-        public U getSecondValue(){
+        public U getSecond(){
             return u;
         }
     }

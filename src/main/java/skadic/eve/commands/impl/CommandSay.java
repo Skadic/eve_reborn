@@ -14,7 +14,7 @@ public class CommandSay extends Command {
     }
 
     @Override
-    public boolean executeCommand(CommandContext ctx) {
+    public boolean execute(CommandContext ctx) {
         if(!ctx.getArgs().isEmpty()) {
             StringBuilder sb = new StringBuilder();
             ctx.getArgs().forEach((s) -> sb.append(s).append(" "));

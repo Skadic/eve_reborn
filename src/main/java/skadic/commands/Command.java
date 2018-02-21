@@ -3,7 +3,6 @@ package skadic.commands;
 
 import skadic.commands.limiters.ILimiter;
 import skadic.commands.limiters.PermissionLimiter;
-import skadic.commands.util.Utils;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,35 +20,31 @@ public abstract class Command{
 
     protected final Set<ILimiter> limiters;
     protected CommandRegistry registry;
-    protected Set<CommandTuple> subCommands;
+    protected Set<SubCommandTuple> subCommands;
 
-    public Command(CommandRegistry registry, Set<ILimiter> limiters) {
-        this.limiters = limiters;
+    public Command(CommandRegistry registry, ILimiter... limiters) {
+        this.limiters = Arrays.stream(limiters).collect(Collectors.toSet());
         this.registry = registry;
         subCommands = new HashSet<>();
         if(!getLimiter(PermissionLimiter.class).isPresent())
-            limiters.add(new PermissionLimiter(Permission.LOW));
-    }
-
-    public Command(CommandRegistry registry, ILimiter... limiters) {
-        this(registry, Arrays.stream(limiters).collect(Collectors.toSet()));
+            this.limiters.add(new PermissionLimiter(Permission.LOW));
     }
 
     public final void addSubCommand(SubCommand subCommand, String name, String... aliases){
-        CommandTuple tuple = new CommandTuple(subCommand, name, aliases);
+        SubCommandTuple tuple = new SubCommandTuple(subCommand, name, aliases);
         subCommands.add(tuple);
         registry.register(subCommand, name, aliases);
     }
 
-    public final Set<CommandTuple> getSubCommands() {
+    public final Set<SubCommandTuple> getSubCommands() {
         return subCommands;
     }
 
     public final boolean isSubCommand(String name){
         if(!hasSubCommands()) return false;
-        for (CommandTuple subCommand : subCommands) {
+        for (SubCommandTuple subCommand : subCommands) {
             if(subCommand.getName().equalsIgnoreCase(name)) return true;
-            for (String[] aliases : subCommands.stream().map(CommandTuple::getAliases).collect(Collectors.toSet())) {
+            for (String[] aliases : subCommands.stream().map(SubCommandTuple::getAliases).collect(Collectors.toSet())) {
                 for (String alias : aliases) {
                     if(name.equalsIgnoreCase(alias)) return true;
                 }
@@ -59,7 +54,7 @@ public abstract class Command{
     }
 
     public final Optional<Command> getSubCommand(String name){
-        for (CommandTuple subCommand : subCommands) {
+        for (SubCommandTuple subCommand : subCommands) {
             if(subCommand.getName().equalsIgnoreCase(name)) return Optional.of(subCommand.getCommand());
         }
         return Optional.empty();
@@ -90,30 +85,26 @@ public abstract class Command{
         return registry;
     }
 
-    public final void execute(CommandContext ctx){
-        if(!executeCommand(ctx)) Utils.sendMessage(ctx.getChannel(), "Something went wrong :thinking:");
-    }
-
     /**
-     * command execution only to be used in the execute method. Not recommended to be made public
+     * command execution. Not recommended to be made public
      *
      * @param ctx the Command Context
-     * @return returns if the command has been executed successfully
+     * @return returns true if the command has been executed successfully
      */
-    protected abstract boolean executeCommand(CommandContext ctx);
+    protected abstract boolean execute(CommandContext ctx);
 
-    protected static class CommandTuple{
+    protected static class SubCommandTuple {
         private SubCommand command;
         private String name;
         private String[] aliases;
 
-        public CommandTuple(SubCommand command, String name, String[] aliases) {
+        public SubCommandTuple(SubCommand command, String name, String[] aliases) {
             this.command = command;
             this.name = name;
             this.aliases = aliases;
         }
 
-        public Command getCommand() {
+        public SubCommand getCommand() {
             return command;
         }
 

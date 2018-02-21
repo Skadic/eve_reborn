@@ -26,7 +26,7 @@ public class CommandStats extends Command{
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         IMessage message = ctx.getMessage();
         List<String> args = ctx.getArgs();
         IUser user = null;
@@ -65,7 +65,7 @@ public class CommandStats extends Command{
         }
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             List<String> args = ctx.getArgs();
 
             if(args.size() <= 1){
@@ -84,7 +84,7 @@ public class CommandStats extends Command{
                 int i = 1;
                 for(Map.Entry<Long, Integer> entry : map.entrySet().stream().sorted(Comparator.comparingInt(v -> -v.getValue())).collect(Collectors.toList())){
                     if(i > count) break;
-                    sb.append(String.format("%d:\t%s\t%d\n", i++, Eve.getClient().getUserByID(entry.getKey()).getName(), entry.getValue()));
+                    sb.append(String.format("%d:%-3s%-20s%d\n", i++, "", Eve.getClient().getUserByID(entry.getKey()).getName(), entry.getValue()));
                 }
                 sb.append("```");
                 Utils.sendMessage(ctx.getChannel(), sb.toString());
@@ -103,7 +103,7 @@ public class CommandStats extends Command{
 
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             IMessage message = ctx.getMessage();
             List<String> args = ctx.getArgs();
             List<IUser> mentions = message.getMentions();

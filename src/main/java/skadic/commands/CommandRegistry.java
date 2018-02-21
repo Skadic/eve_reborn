@@ -34,8 +34,11 @@ public class CommandRegistry{
         nameToAliases = new HashMap<>();
     }
 
-    public void call(String name, CommandContext ctx){
-        getCommand(name).ifPresent((command) -> call(command, ctx));
+    public void call(String name, CommandContext ctx) throws CommandNotFoundException{
+        if(getCommand(name).isPresent())
+            call(getCommand(name).get(), ctx);
+        else
+            throw new CommandNotFoundException(name);
     }
 
     private void call(Command command, CommandContext ctx){
@@ -82,7 +85,6 @@ public class CommandRegistry{
     public String getPrefix() {
         return prefix;
     }
-
 
     public BiMap<String, Command> getFilteredCommands() {
         return ImmutableBiMap.copyOf(commands.entrySet().stream()
