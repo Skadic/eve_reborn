@@ -16,7 +16,7 @@ public class CommandHelp extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         Map<String, Command> commands = registry.getFilteredCommands();
         IChannel channel = ctx.getChannel();
         List<String> args = ctx.getArgs();
@@ -98,7 +98,7 @@ public class CommandHelp extends Command {
 
             if(command.hasSubCommands()){
                 StringBuilder sb = new StringBuilder();
-                for (CommandTuple subCommand : command.getSubCommands()) {
+                for (SubCommandTuple subCommand : command.getSubCommands()) {
                     sb.append(subCommand.getName()).append('\n');
                 }
                 builder.appendField("Sub Commands", sb.toString(), false);

@@ -15,7 +15,7 @@ public class CommandDisconnect extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         sendMessage(ctx.getChannel(), "Disconnecting...");
         Eve.getInstance().disconnect();
         System.exit(0);

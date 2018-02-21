@@ -24,7 +24,7 @@ public class CommandZircons extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         List<String> args = ctx.getArgs();
         IChannel channel = ctx.getChannel();
         IUser author = ctx.getAuthor();
@@ -62,7 +62,7 @@ public class CommandZircons extends Command {
         }
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             List<String> args = ctx.getArgs();
             IChannel channel = ctx.getChannel();
             IUser author = ctx.getAuthor();
@@ -99,7 +99,7 @@ public class CommandZircons extends Command {
         }
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             List<String> args = ctx.getArgs();
             IChannel channel = ctx.getChannel();
             List<IUser> mentions = ctx.getMessage().getMentions();

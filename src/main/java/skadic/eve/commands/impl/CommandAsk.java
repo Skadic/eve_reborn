@@ -33,7 +33,7 @@ public class CommandAsk extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         List<String> args = ctx.getArgs();
 
         if (args.isEmpty()) return false;
@@ -53,9 +53,7 @@ public class CommandAsk extends Command {
                         .getJSONObject(0)
                         .getString("plaintext");
 
-                text.replace("\\n", "\n");
                 Utils.sendMessage(ctx.getChannel(), text);
-                return true;
             } else
                 Utils.sendMessage(ctx.getChannel(), ":thinking:");
             return true;

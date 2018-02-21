@@ -25,7 +25,7 @@ public class CommandTitle extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         List<String> args = ctx.getArgs();
         IUser author = ctx.getAuthor();
         IMessage message = ctx.getMessage();

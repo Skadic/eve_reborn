@@ -23,7 +23,7 @@ public class CommandPermission extends Command {
     }
 
     @Override
-    protected boolean executeCommand(CommandContext ctx) {
+    protected boolean execute(CommandContext ctx) {
         if(ctx.getArgs().size() != 1 || ctx.getMessage().getRoleMentions().size() != 1) return false;
 
         IRole role = ctx.getMessage().getRoleMentions().get(0);
@@ -53,7 +53,7 @@ public class CommandPermission extends Command {
         }
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             List<IRole> mentions = ctx.getMessage().getRoleMentions();
             List<String> args = ctx.getArgs();
 
@@ -77,7 +77,7 @@ public class CommandPermission extends Command {
         }
 
         @Override
-        protected boolean executeCommand(CommandContext ctx) {
+        protected boolean execute(CommandContext ctx) {
             List<String> args = ctx.getArgs();
             IUser author = ctx.getAuthor();
             IChannel channel = ctx.getChannel();
