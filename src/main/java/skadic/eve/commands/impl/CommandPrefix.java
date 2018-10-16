@@ -4,10 +4,10 @@ import skadic.commands.*;
 import skadic.commands.limiters.PermissionLimiter;
 import skadic.commands.util.Utils;
 
-// TODO: 01.02.2018 Just do this
 public class CommandPrefix extends Command {
     public CommandPrefix(CommandRegistry registry) {
         super(registry);
+        addSubCommand(new CommandSetPrefix(registry, this) ,"seti");
     }
 
     @Override
@@ -20,12 +20,17 @@ public class CommandPrefix extends Command {
 
     private class CommandSetPrefix extends SubCommand {
 
+        private final CommandRegistry registry;
+
         public CommandSetPrefix(CommandRegistry registry, Command parentCommand) {
             super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN));
+            this.registry = registry;
         }
 
         @Override
         protected boolean execute(CommandContext ctx) {
+            // TODO: 05.03.2018  finish this
+
 
             return true;
         }

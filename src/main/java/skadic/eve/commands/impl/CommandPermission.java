@@ -46,7 +46,7 @@ public class CommandPermission extends Command {
     }
 
     @Help(syntax = "[Permission] [Role]", description = "Sets the permission of a role")
-    private class CommandSetPermission extends SubCommand{
+    private class CommandSetPermission extends SubCommand {
 
         public CommandSetPermission(CommandRegistry registry, Command parentCommand) {
             super(registry, parentCommand, new PermissionLimiter(Permission.ADMIN));

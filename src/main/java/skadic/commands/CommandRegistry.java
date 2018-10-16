@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 import static skadic.commands.util.Utils.sendMessage;
 
+
+// TODO: 05.03.2018 fix, not being able to register 2 subcommands of the same name 
 public class CommandRegistry{
 
     /**

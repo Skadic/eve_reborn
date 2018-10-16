@@ -25,5 +25,6 @@ public class EveCommandManager extends ServerCommandManager{
         registry.register(new CommandPermission(registry), "permission", "permissions", "p");
         registry.register(new CommandAsk(registry), "ask");
         registry.register(new CommandMath(registry), "math", "calc");
+        registry.register(new CommandPrefix(registry), "prefix");
     }
 }
